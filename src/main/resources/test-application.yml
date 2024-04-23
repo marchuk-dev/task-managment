@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: miratech-techtask
+  datasource:
+    password: postgres
+    username: postgres
+    url: 'jdbc:postgresql://localhost:5432/miratech_db?'
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        default_schema: miratech_schema
+        generate_statistics: false
+        jdbc:
+          batch_size: 100
+        order_updates: true
+        order_inserts: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 1
+    locations: "classpath:db/migration"
+    default-schema: miratech_schema
+    create-schemas: true
+    fail-on-missing-locations: true
+    mixed: true
