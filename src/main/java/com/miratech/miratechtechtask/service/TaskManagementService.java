@@ -1,13 +1,20 @@
 package com.miratech.miratechtechtask.service;
 
+import com.miratech.miratechtechtask.dto.TaskDto;
+import com.miratech.miratechtechtask.dto.TaskStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface TaskManagementService {
-    Object receiveAll();
+    Page<TaskDto> getAll(Pageable pageable, String title, String status);
 
-    Object receiveById();
+    TaskDto getById(Long id);
 
-    Object post();
+    TaskDto create(TaskDto dto);
 
-    Object updateById();
+    TaskDto update(TaskDto dto);
 
-    Object deleteById();
+    TaskDto updateStatus(Long id, TaskStatus status);
+
+    void deleteById(Long id);
 }
