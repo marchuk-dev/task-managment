@@ -1,22 +1,31 @@
 package com.miratech.miratechtechtask.entity;
 
-import com.miratech.miratechtechtask.enums.TaskStatus;
+import com.miratech.miratechtechtask.dto.TaskStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 @Entity
-@Getter
-@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Table(name = "task")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String description;
+
     @Enumerated(EnumType.STRING)
-    private TaskStatus enumRole;
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(nullable = false)
+    private TaskStatus status;
 
 }
