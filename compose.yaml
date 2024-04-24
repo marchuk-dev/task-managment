@@ -7,3 +7,10 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432'
+  miratech-techtask:
+    image: mishaakamichael999/miratech-techtask
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db-postgres

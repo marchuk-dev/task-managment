@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: miratech-techtask
+  datasource:
+    password: postgres
+    username: postgres
+    url: 'jdbc:postgresql://localhost:5432/miratech_db?'
+  jpa:
+    hibernate:
+      ddl-auto: none
