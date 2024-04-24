@@ -1,4 +1,5 @@
 CREATE TYPE "task_status_type" AS ENUM ('PENDING','COMPLETED','IN_PROGRESS','TO_DO','TESTING');
+
 CREATE TABLE task
 (
     id          BIGSERIAL NOT NULL,
@@ -7,3 +8,5 @@ CREATE TABLE task
     status      task_status_type,
     CONSTRAINT pk_tasks PRIMARY KEY (id)
 );
+
+CREATE INDEX title_asc ON task (title, status);
