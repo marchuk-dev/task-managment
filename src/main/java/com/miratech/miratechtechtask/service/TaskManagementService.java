@@ -12,7 +12,7 @@ public interface TaskManagementService {
 
     TaskDto create(TaskDto dto);
 
-    TaskDto update(TaskDto dto);
+    TaskDto update(Long id, TaskDto dto);
 
     TaskDto updateStatus(Long id, TaskStatus status);
 

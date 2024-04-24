@@ -42,9 +42,10 @@ public class TaskManagementServiceImpl implements TaskManagementService {
             initialSpec = Specification.where((root, query, cb) -> cb.equal(root.get("title"), title));
         }
         if (Objects.nonNull(status)) {
+            TaskStatus taskStatus = TaskStatus.fromStatus(status);
             initialSpec = Objects.isNull(initialSpec) ?
-                    Specification.where((root, query, cb) -> cb.equal(root.get("status"), status)) :
-                    initialSpec.and((root, query, cb) -> cb.equal(root.get("status"), status));
+                    Specification.where((root, query, cb) -> cb.equal(root.get("status"), taskStatus)) :
+                    initialSpec.and((root, query, cb) -> cb.equal(root.get("status"), taskStatus));
         }
         Page<Task> tasks = Objects.isNull(initialSpec) ?
                 taskRepository.findAll(pageable) :
@@ -85,12 +86,16 @@ public class TaskManagementServiceImpl implements TaskManagementService {
      * @throws EntityNotFoundException If no task with the specified ID is found.
      */
     @Override
-    public TaskDto update(TaskDto dto) {
-        return taskRepository.findById(dto.id())
-                .map(task -> taskMapper.toEntity(dto))
-                .map(taskRepository::save)
+    public TaskDto update(Long id, TaskDto dto) {
+        return taskRepository.findById(id)
+                .map(existingTask -> {
+                    existingTask.setTitle(dto.title());
+                    existingTask.setDescription(dto.description());
+                    existingTask.setStatus(TaskStatus.fromStatus(dto.status()));
+                    return taskRepository.save(existingTask);
+                })
                 .map(taskMapper::toDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, dto.id())));
+                .orElseThrow(() -> new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, id)));
     }
 
     /**
