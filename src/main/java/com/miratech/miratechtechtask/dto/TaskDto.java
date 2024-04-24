@@ -12,5 +12,6 @@ import java.io.Serializable;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public record TaskDto(Long id, @NotBlank String title, @NotBlank String description, TaskStatus status) implements Serializable {
+public record TaskDto(Long id, @NotBlank String title, @NotBlank String description,
+                      String status) implements Serializable {
 }
