@@ -124,7 +124,9 @@ public class TaskManagementServiceImpl implements TaskManagementService {
         taskRepository.findById(id)
                 .ifPresentOrElse(
                         taskRepository::delete,
-                        () -> new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, id))
+                        () -> {
+                            throw new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, id));
+                        }
                 );
     }
 
