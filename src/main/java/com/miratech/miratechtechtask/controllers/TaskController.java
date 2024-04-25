@@ -16,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,16 +70,16 @@ public class TaskController {
      * Create a new task.
      *
      * @param dto The TaskDto containing the details of the task to be created.
-     * @return ResponseEntity<TaskDto> containing the created task if successful, with HTTP status code 201 (Created).
+     * @return TaskDto containing the created task if successful, with HTTP status code 201 (Created).
      */
     @ApiOperation("Create a new task")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Task created successfully")
     })
     @PostMapping("tasks")
-    public ResponseEntity<TaskDto> create(@RequestBody TaskDto dto) {
-        TaskDto createdTask = taskService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
+    @ResponseStatus(HttpStatus.CREATED)
+    public TaskDto create(@RequestBody TaskDto dto) {
+        return taskService.create(dto);
     }
 
     /**
