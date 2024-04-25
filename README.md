@@ -43,10 +43,15 @@ docker run -d --name miratech-techtask -p 8080:8080 mishaakamichael999/miratech-
 <details lang="java">
 <summary>API</summary>
   GET http://localhost:8080/miratech/tasks
+
   POST http://localhost:8080/miratech/tasks
+
   GET http://localhost:8080/miratech/tasks/{id}
+
   PUT http://localhost:8080/miratech/tasks/{id}
+
   PATCH http://localhost:8080/miratech/tasks/{id}
+
   DELETE http://localhost:8080/miratech/tasks/{id}
 </details>
 
