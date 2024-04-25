@@ -2,9 +2,9 @@ spring:
   application:
     name: miratech-techtask
   datasource:
-    password: ${DB_PASSWORD}
-    username: ${DB_USERNAME}
-    url: 'jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?'
+    password: postgres
+    username: postgres
+    url: 'jdbc:postgresql://postgres-miratech:5432/miratech_db?'
   jpa:
     hibernate:
       ddl-auto: none
