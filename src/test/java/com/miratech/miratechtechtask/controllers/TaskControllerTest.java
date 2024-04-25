@@ -42,6 +42,7 @@ public class TaskControllerTest {
     public static final String MESSAGE_NOT_FOUND = "Task with id %d not found";
     public static final String STATUS_NOT_FOUND = "NOT_FOUND";
     public static final String PENDING = "pending";
+    public static final Integer ID = 100;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -185,11 +186,11 @@ public class TaskControllerTest {
         @SneakyThrows
         @DisplayName("[200] GET by ID")
         void testGetByIdIs200() {
-            Task task = taskRepository.findById(10L).orElseThrow();
-            mvc.perform(get(URL + "/10"))
+            Task task = taskRepository.findById(ID.longValue()).orElseThrow();
+            mvc.perform(get(URL + "/" + task.getId()))
                     .andExpect(status().isOk())
                     .andDo(print())
-                    .andExpect(jsonPath("$.id").value(10))
+                    .andExpect(jsonPath("$.id").value(task.getId()))
                     .andExpect(jsonPath("$.title", is(task.getTitle())))
                     .andExpect(jsonPath("$.status", is(task.getStatus().getStatus())));
         }
