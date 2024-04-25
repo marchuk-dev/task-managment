@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("miratech")
+@Validated
 public class TaskController {
 
     private final TaskManagementService taskService;
@@ -111,7 +113,7 @@ public class TaskController {
             @ApiResponse(code = 404, message = "Task with the specified ID not found")
     })
     @PatchMapping("tasks/{id}")
-    public TaskDto updateStatus(@PathVariable Long id, @RequestBody UpdateStatusDto statusDto) {
+    public TaskDto updateStatus(@PathVariable Long id, @RequestBody @Valid UpdateStatusDto statusDto) {
         return taskService.updateStatus(id, TaskStatus.fromStatus(statusDto.status()));
     }
 
