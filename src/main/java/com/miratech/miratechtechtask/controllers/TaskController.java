@@ -41,10 +41,10 @@ public class TaskController {
             @ApiResponse(code = 200, message = "Return all present tasks")
     })
     @GetMapping("tasks")
-    public Page<TaskDto> getAll(@Min(0) @RequestParam(required = false, defaultValue = "0") @Valid Integer page,
-                                @Min(1) @RequestParam(required = false, defaultValue = "10") @Valid Integer offset,
-                                String title,
-                                @RequestParam(required = false) String status) {
+    public Page<TaskDto> getAll(@Min(0) @RequestParam(value = "page", required = false, defaultValue = "0") @Valid Integer page,
+                                @Min(1) @RequestParam(value = "offset", required = false, defaultValue = "10") @Valid Integer offset,
+                                @RequestParam(value = "title", required = false) String title,
+                                @RequestParam(value = "status", required = false) String status) {
         Pageable pageable = PageRequest.of(page, offset,
                 Sort.by("title"));
         return taskService.getAll(pageable, title, status);
@@ -62,7 +62,7 @@ public class TaskController {
             @ApiResponse(code = 404, message = "Task with the specified ID not found")
     })
     @GetMapping("tasks/{id}")
-    public TaskDto getById(@PathVariable Long id) {
+    public TaskDto getById(@PathVariable("id") Long id) {
         return taskService.getById(id);
     }
 
@@ -95,7 +95,7 @@ public class TaskController {
             @ApiResponse(code = 404, message = "Task with the specified ID not found")
     })
     @PutMapping("tasks/{id}")
-    public TaskDto updateById(@PathVariable Long id, @RequestBody TaskDto dto) {
+    public TaskDto updateById(@PathVariable("id") Long id, @RequestBody @Valid TaskDto dto) {
         return taskService.update(id, dto);
     }
 
@@ -112,7 +112,7 @@ public class TaskController {
             @ApiResponse(code = 404, message = "Task with the specified ID not found")
     })
     @PatchMapping("tasks/{id}")
-    public TaskDto updateStatus(@PathVariable Long id, @RequestBody @Valid UpdateStatusDto statusDto) {
+    public TaskDto updateStatus(@PathVariable("id") Long id, @RequestBody UpdateStatusDto statusDto) {
         return taskService.updateStatus(id, TaskStatus.fromStatus(statusDto.status()));
     }
 
@@ -127,7 +127,7 @@ public class TaskController {
             @ApiResponse(code = 404, message = "Task with the specified ID not found")
     })
     @DeleteMapping("tasks/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         taskService.deleteById(id);
     }
 
