@@ -4,9 +4,9 @@ import com.miratech.miratechtechtask.dto.TaskDto;
 import com.miratech.miratechtechtask.dto.TaskStatus;
 import com.miratech.miratechtechtask.dto.UpdateStatusDto;
 import com.miratech.miratechtechtask.services.TaskManagementService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -36,10 +36,8 @@ public class TaskController {
      *
      * @return A list of TaskDto objects representing all tasks.
      */
-    @ApiOperation("Get all tasks")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Return all present tasks")
-    })
+    @Operation(summary = "Get all tasks")
+    @ApiResponse(responseCode = "200", description = "Return all present tasks")
     @GetMapping("tasks")
     public Page<TaskDto> getAll(@Min(0) @RequestParam(value = "page", required = false, defaultValue = "0") @Valid Integer page,
                                 @Min(1) @RequestParam(value = "offset", required = false, defaultValue = "10") @Valid Integer offset,
@@ -56,10 +54,10 @@ public class TaskController {
      * @param id The ID of the task to retrieve.
      * @return The TaskDto object representing the task with the specified ID.
      */
-    @ApiOperation("Receive task by ID")
+    @Operation(summary = "Receive task by ID")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Task is returned"),
-            @ApiResponse(code = 404, message = "Task with the specified ID not found")
+            @ApiResponse(responseCode = "200", description = "Task is returned"),
+            @ApiResponse(responseCode = "404", description = "Task with the specified ID not found")
     })
     @GetMapping("tasks/{id}")
     public TaskDto getById(@PathVariable("id") Long id) {
@@ -70,12 +68,10 @@ public class TaskController {
      * Create a new task.
      *
      * @param dto The TaskDto containing the details of the task to be created.
-     * @return TaskDto containing the created task if successful, with HTTP status code 201 (Created).
+     * @return TaskDto containing the created task if successful, with HTTP status responseCode 201 (Created).
      */
-    @ApiOperation("Create a new task")
-    @ApiResponses({
-            @ApiResponse(code = 201, message = "Task created successfully")
-    })
+    @Operation(summary = "Create a new task")
+    @ApiResponse(responseCode = "201", description = "Task created successfully")
     @PostMapping("tasks")
     @ResponseStatus(HttpStatus.CREATED)
     public TaskDto create(@RequestBody @Valid TaskDto dto) {
@@ -89,10 +85,10 @@ public class TaskController {
      * @param dto The TaskDto object representing the updated task data.
      * @return The TaskDto object representing the updated task.
      */
-    @ApiOperation("Update task by ID")
+    @Operation(summary = "Update task by ID")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Task updated successfully"),
-            @ApiResponse(code = 404, message = "Task with the specified ID not found")
+            @ApiResponse(responseCode = "200", description = "Task updated successfully"),
+            @ApiResponse(responseCode = "404", description = "Task with the specified ID not found")
     })
     @PutMapping("tasks/{id}")
     public TaskDto updateById(@PathVariable("id") Long id, @RequestBody @Valid TaskDto dto) {
@@ -106,10 +102,10 @@ public class TaskController {
      * @param statusDto The new status of the task.
      * @return The updated TaskDto representing the task with the new status.
      */
-    @ApiOperation("Update task status by ID")
+    @Operation(summary = "Update task status by ID")
     @ApiResponses({
-            @ApiResponse(code = 204, message = "Task status updated successfully"),
-            @ApiResponse(code = 404, message = "Task with the specified ID not found")
+            @ApiResponse(responseCode = "204", description = "Task status updated successfully"),
+            @ApiResponse(responseCode = "404", description = "Task with the specified ID not found")
     })
     @PatchMapping("tasks/{id}")
     public TaskDto updateStatus(@PathVariable("id") Long id, @RequestBody @Valid UpdateStatusDto statusDto) {
@@ -121,10 +117,10 @@ public class TaskController {
      *
      * @param id The ID of the task to delete.
      */
-    @ApiOperation("Delete task by ID")
+    @Operation(summary = "Delete task by ID")
     @ApiResponses({
-            @ApiResponse(code = 204, message = "Task deleted successfully"),
-            @ApiResponse(code = 404, message = "Task with the specified ID not found")
+            @ApiResponse(responseCode = "204", description = "Task deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Task with the specified ID not found")
     })
     @DeleteMapping("tasks/{id}")
     public void deleteById(@PathVariable("id") Long id) {

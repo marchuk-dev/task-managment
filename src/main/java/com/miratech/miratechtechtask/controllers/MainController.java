@@ -1,8 +1,8 @@
 package com.miratech.miratechtechtask.controllers;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +32,9 @@ public class MainController {
      * @param response HttpServletResponse object representing the response to be sent back to the client.
      * @throws IOException if an I/O error occurs while sending the redirect response.
      */
-    @ApiOperation("Main page redirection to resource")
+    @Operation(summary = "Main page redirection to resource")
     @ApiResponses({
-            @ApiResponse(code = 302, message = "Return all present tasks")
+            @ApiResponse(responseCode = "302", description = "Return all present tasks")
     })
     @GetMapping
     public void redirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
