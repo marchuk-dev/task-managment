@@ -1,4 +1,4 @@
-package com.miratech.miratechtechtask.annotation;
+package com.miratech.miratechtechtask.validators;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

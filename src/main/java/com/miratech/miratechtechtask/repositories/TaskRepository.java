@@ -1,6 +1,6 @@
-package com.miratech.miratechtechtask.repository;
+package com.miratech.miratechtechtask.repositories;
 
-import com.miratech.miratechtechtask.entity.Task;
+import com.miratech.miratechtechtask.entities.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

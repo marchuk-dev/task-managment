@@ -1,4 +1,4 @@
-package com.miratech.miratechtechtask.entity;
+package com.miratech.miratechtechtask.entities;
 
 import com.miratech.miratechtechtask.dto.TaskStatus;
 import jakarta.persistence.*;

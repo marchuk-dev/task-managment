@@ -3,7 +3,7 @@ package com.miratech.miratechtechtask.controllers;
 import com.miratech.miratechtechtask.dto.TaskDto;
 import com.miratech.miratechtechtask.dto.TaskStatus;
 import com.miratech.miratechtechtask.dto.UpdateStatusDto;
-import com.miratech.miratechtechtask.service.TaskManagementService;
+import com.miratech.miratechtechtask.services.TaskManagementService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

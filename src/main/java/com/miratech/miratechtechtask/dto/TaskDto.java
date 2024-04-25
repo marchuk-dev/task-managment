@@ -1,7 +1,7 @@
 package com.miratech.miratechtechtask.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.miratech.miratechtechtask.entity.Task;
+import com.miratech.miratechtechtask.entities.Task;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 

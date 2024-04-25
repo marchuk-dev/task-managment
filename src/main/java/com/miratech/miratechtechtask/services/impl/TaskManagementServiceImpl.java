@@ -1,11 +1,11 @@
-package com.miratech.miratechtechtask.service.impl;
+package com.miratech.miratechtechtask.services.impl;
 
 import com.miratech.miratechtechtask.dto.TaskDto;
 import com.miratech.miratechtechtask.dto.TaskStatus;
-import com.miratech.miratechtechtask.entity.Task;
-import com.miratech.miratechtechtask.mapper.TaskMapper;
-import com.miratech.miratechtechtask.repository.TaskRepository;
-import com.miratech.miratechtechtask.service.TaskManagementService;
+import com.miratech.miratechtechtask.entities.Task;
+import com.miratech.miratechtechtask.mappers.TaskMapper;
+import com.miratech.miratechtechtask.repositories.TaskRepository;
+import com.miratech.miratechtechtask.services.TaskManagementService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,14 +27,6 @@ public class TaskManagementServiceImpl implements TaskManagementService {
 
     private final TaskMapper taskMapper;
 
-    /**
-     * Retrieves all tasks based on optional filtering parameters and paginates the results.
-     *
-     * @param pageable Pagination information.
-     * @param title    (Optional) Title to filter tasks by.
-     * @param status   (Optional) Status to filter tasks by.
-     * @return A Page containing TaskDto objects representing the tasks.
-     */
     @Override
     public Page<TaskDto> getAll(Pageable pageable, String title, String status) {
         Specification<Task> initialSpec = null;
@@ -53,13 +45,6 @@ public class TaskManagementServiceImpl implements TaskManagementService {
         return tasks.map(taskMapper::toDto);
     }
 
-    /**
-     * Retrieves a task by its ID.
-     *
-     * @param id The ID of the task to retrieve.
-     * @return The TaskDto object representing the task with the specified ID.
-     * @throws EntityNotFoundException If no task with the specified ID is found.
-     */
     @Override
     public TaskDto getById(Long id) {
         return taskRepository.findById(id)
@@ -67,24 +52,11 @@ public class TaskManagementServiceImpl implements TaskManagementService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, id)));
     }
 
-    /**
-     * Creates a new task.
-     *
-     * @param dto The TaskDto object representing the task to create.
-     * @return The TaskDto object representing the newly created task.
-     */
     @Override
     public TaskDto create(TaskDto dto) {
         return taskMapper.toDto(taskRepository.save(taskMapper.toEntity(dto)));
     }
 
-    /**
-     * Updates an existing task.
-     *
-     * @param dto The TaskDto object representing the updated task data.
-     * @return The TaskDto object representing the updated task.
-     * @throws EntityNotFoundException If no task with the specified ID is found.
-     */
     @Override
     public TaskDto update(Long id, TaskDto dto) {
         return taskRepository.findById(id)
@@ -98,14 +70,6 @@ public class TaskManagementServiceImpl implements TaskManagementService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, id)));
     }
 
-    /**
-     * Updates the status of an existing task.
-     *
-     * @param id     The ID of the task to update.
-     * @param status The new status for the task.
-     * @return The TaskDto object representing the updated task.
-     * @throws EntityNotFoundException If no task with the specified ID is found.
-     */
     @Override
     public TaskDto updateStatus(Long id, TaskStatus status) {
         return taskRepository.findById(id)
@@ -118,12 +82,6 @@ public class TaskManagementServiceImpl implements TaskManagementService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format(FORMAT_TASK_NOT_FOUND, id)));
     }
 
-    /**
-     * Deletes a task by its ID.
-     *
-     * @param id The ID of the task to delete.
-     * @throws EntityNotFoundException If no task with the specified ID is found.
-     */
     @Override
     public void deleteById(Long id) {
         taskRepository.findById(id)
