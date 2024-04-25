@@ -78,7 +78,7 @@ public class TaskController {
     })
     @PostMapping("tasks")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaskDto create(@RequestBody TaskDto dto) {
+    public TaskDto create(@RequestBody @Valid TaskDto dto) {
         return taskService.create(dto);
     }
 
@@ -112,7 +112,7 @@ public class TaskController {
             @ApiResponse(code = 404, message = "Task with the specified ID not found")
     })
     @PatchMapping("tasks/{id}")
-    public TaskDto updateStatus(@PathVariable("id") Long id, @RequestBody UpdateStatusDto statusDto) {
+    public TaskDto updateStatus(@PathVariable("id") Long id, @RequestBody @Valid UpdateStatusDto statusDto) {
         return taskService.updateStatus(id, TaskStatus.fromStatus(statusDto.status()));
     }
 
