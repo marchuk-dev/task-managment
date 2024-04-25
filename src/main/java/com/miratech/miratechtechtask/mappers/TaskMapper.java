@@ -1,9 +1,12 @@
 package com.miratech.miratechtechtask.mappers;
 
+import com.miratech.miratechtechtask.dto.TaskDto;
 import com.miratech.miratechtechtask.dto.TaskStatus;
 import com.miratech.miratechtechtask.entities.Task;
-import com.miratech.miratechtechtask.dto.TaskDto;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ValueMapping;
+import org.mapstruct.ValueMappings;
 
 /**
  * Mapper interface for converting between Task and TaskDto objects.
@@ -39,7 +42,7 @@ public interface TaskMapper {
             @ValueMapping(source = "COMPLETED", target = "completed"),
             @ValueMapping(source = "IN_PROGRESS", target = "in progress"),
             @ValueMapping(source = "TO_DO", target = "to do"),
-            @ValueMapping(source = "TESTING", target = "in testing")
+            @ValueMapping(source = "IN_TESTING", target = "in testing")
     })
     String mapTaskStatusToString(TaskStatus status);
 
@@ -54,7 +57,7 @@ public interface TaskMapper {
             @ValueMapping(source = "completed", target = "COMPLETED"),
             @ValueMapping(source = "in progress", target = "IN_PROGRESS"),
             @ValueMapping(source = "to do", target = "TO_DO"),
-            @ValueMapping(source = "in testing", target = "TESTING")
+            @ValueMapping(source = "in testing", target = "IN_TESTING")
     })
     TaskStatus mapStringToTaskStatus(String status);
 }

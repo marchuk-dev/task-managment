@@ -24,19 +24,19 @@ class TaskStatusTest {
                 Arguments.of("pending", TaskStatus.PENDING),
                 Arguments.of("completed", TaskStatus.COMPLETED),
                 Arguments.of("to do", TaskStatus.TO_DO),
-                Arguments.of("in testing", TaskStatus.TESTING),
+                Arguments.of("in testing", TaskStatus.IN_TESTING),
 
                 Arguments.of("IN PROGRESS", TaskStatus.IN_PROGRESS),
                 Arguments.of("PENDING", TaskStatus.PENDING),
                 Arguments.of("COMPLETED", TaskStatus.COMPLETED),
                 Arguments.of("TO DO", TaskStatus.TO_DO),
-                Arguments.of("IN TESTING", TaskStatus.TESTING),
+                Arguments.of("IN TESTING", TaskStatus.IN_TESTING),
 
                 Arguments.of("IN PRogrESS", TaskStatus.IN_PROGRESS),
                 Arguments.of("PENdinG", TaskStatus.PENDING),
                 Arguments.of("COMPLEteD", TaskStatus.COMPLETED),
                 Arguments.of("to DO", TaskStatus.TO_DO),
-                Arguments.of("IN testing", TaskStatus.TESTING)
+                Arguments.of("IN testing", TaskStatus.IN_TESTING)
         );
     }
 

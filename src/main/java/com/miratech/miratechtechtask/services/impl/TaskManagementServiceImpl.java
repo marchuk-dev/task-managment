@@ -61,9 +61,9 @@ public class TaskManagementServiceImpl implements TaskManagementService {
     public TaskDto update(Long id, TaskDto dto) {
         return taskRepository.findById(id)
                 .map(existingTask -> {
-                    existingTask.setTitle(dto.title());
-                    existingTask.setDescription(dto.description());
-                    existingTask.setStatus(TaskStatus.fromStatus(dto.status()));
+                    existingTask.setTitle(dto.getTitle());
+                    existingTask.setDescription(dto.getDescription());
+                    existingTask.setStatus(TaskStatus.fromStatus(dto.getStatus()));
                     return taskRepository.save(existingTask);
                 })
                 .map(taskMapper::toDto)

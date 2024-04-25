@@ -222,13 +222,13 @@ public class TaskControllerTest {
             dto = TaskDto.builder()
                     .title("Test")
                     .description("Testing")
-                    .status(TaskStatus.TESTING.getStatus())
+                    .status(TaskStatus.IN_TESTING.getStatus())
                     .build();
         }
 
         @AfterAll
         void afterAll() {
-            taskRepository.deleteAll(taskRepository.findByTitle(dto.title()));
+            taskRepository.deleteAll(taskRepository.findByTitle(dto.getTitle()));
         }
 
 
@@ -245,7 +245,7 @@ public class TaskControllerTest {
                     .andExpect(status().isCreated())
                     .andExpect(jsonPath("$.title").value("Test"))
                     .andExpect(jsonPath("$.description").value("Testing"))
-                    .andExpect(jsonPath("$.status").value(TaskStatus.TESTING.getStatus()));
+                    .andExpect(jsonPath("$.status").value(TaskStatus.IN_TESTING.getStatus()));
         }
 
 
@@ -265,7 +265,7 @@ public class TaskControllerTest {
             task = taskRepository.save(Task.builder()
                     .title("Test")
                     .description("Testing")
-                    .status(TaskStatus.TESTING)
+                    .status(TaskStatus.IN_TESTING)
                     .build()
             );
         }
@@ -324,12 +324,12 @@ public class TaskControllerTest {
             requestObject = TaskDto.builder()
                     .title("Test")
                     .description("Testing")
-                    .status(TaskStatus.TESTING.getStatus())
+                    .status(TaskStatus.IN_TESTING.getStatus())
                     .build();
             task = taskRepository.save(Task.builder()
                     .title("Test")
                     .description("Testing")
-                    .status(TaskStatus.TESTING)
+                    .status(TaskStatus.IN_TESTING)
                     .build()
             );
         }
@@ -348,12 +348,12 @@ public class TaskControllerTest {
                             .accept(MediaType.APPLICATION_JSON_VALUE)
                             .content(objectMapper.writeValueAsString(requestObject))
                     )
-                    .andExpect(jsonPath("$.id").value(task.getId()))
-                    .andExpect(jsonPath("$.title").value(requestObject.title()))
-                    .andExpect(jsonPath("$.description").value(requestObject.description()))
-                    .andExpect(jsonPath("$.status").value(requestObject.status()))
+                    .andDo(print())
                     .andExpect(status().isOk())
-                    .andDo(print());
+                    .andExpect(jsonPath("$.id").value(task.getId()))
+                    .andExpect(jsonPath("$.title").value(requestObject.getTitle()))
+                    .andExpect(jsonPath("$.description").value(requestObject.getDescription()))
+                    .andExpect(jsonPath("$.status").value(requestObject.getStatus()));
         }
 
         @Test
@@ -386,7 +386,7 @@ public class TaskControllerTest {
             task = taskRepository.save(Task.builder()
                     .title("Test")
                     .description("Testing")
-                    .status(TaskStatus.TESTING)
+                    .status(TaskStatus.IN_TESTING)
                     .build()
             );
         }
