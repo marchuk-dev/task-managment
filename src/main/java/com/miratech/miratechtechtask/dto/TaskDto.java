@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.miratech.miratechtechtask.entities.Task;
 import com.miratech.miratechtechtask.validators.EnumValidator;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,7 +12,9 @@ import java.io.Serializable;
  * DTO for {@link Task}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Builder
 public class TaskDto implements Serializable {
 
