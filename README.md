@@ -27,12 +27,9 @@ mvn clean install -Dmaven.test.skip=true
 <details lang="java">
 <summary>Docker:</summary>
 
+Clone project and run compose.yaml
 ```
-docker pull mishaakamichael999/miratech-techtask
-```
-
-```
-docker run -d --name miratech-techtask -p 8080:8080 mishaakamichael999/miratech-techtask
+docker.exe compose -f compose.yaml  up 
 ```
 
 </details>
