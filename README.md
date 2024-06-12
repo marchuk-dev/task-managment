@@ -1,7 +1,3 @@
-**This is solution of the technital task from Miratech for Java Trainee from Mykhailo Marchuk**
-
-**Info about endpoints you can read on the page http://localhost:8080/swagger-ui/index.html#/ if you run it locally**
-
 **Test Coverage**
 ![image](https://github.com/marchuk-engineer/miratech-techtask/assets/112648286/ba36f939-aa3c-40f6-b840-8aeedb99b8ce)
 
@@ -39,7 +35,7 @@ docker.exe compose -f compose.yaml  up
 
 <details lang="java">
 <summary>API</summary>
-
+  
   GET http://localhost:8080/miratech/tasks
 
   POST http://localhost:8080/miratech/tasks
@@ -56,6 +52,8 @@ docker.exe compose -f compose.yaml  up
 
 <details lang="java">
 <summary>Task description:</summary>
+Swagger doc: http://localhost:8080/swagger-ui/index.html#/
+
 Simple RESTful API for managing tasks. The API should allow users to perform CRUD operations (Create, Read, Update, Delete) on tasks.
 
 Technologies:
